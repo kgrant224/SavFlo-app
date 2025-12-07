@@ -1,0 +1,202 @@
+{
+  "id": "102019af65dc47678179b62f320df8a13b7",
+  "version": "102019af65dc4767629bdb0fa95a0889023",
+  "schema": {
+    "name": "subscription",
+    "description": "Manages recurring subscription services for the user.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique identifier for the subscription.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal system identifier"
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "user_id",
+        "description": "Reference ID of the user who owns this subscription.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Foreign key reference"
+        }
+      },
+      {
+        "name": "service_name",
+        "description": "Name of the subscription service.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Personal service usage data"
+        }
+      },
+      {
+        "name": "amount",
+        "description": "Recurring cost of the subscription.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Financial cost data"
+        },
+        "numeric": "float"
+      },
+      {
+        "name": "billing_cycle",
+        "description": "Frequency of the billing for the subscription.",
+        "type": 100,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Contractual details"
+        },
+        "enumeration": [
+          {
+            "value": "Unspecified"
+          },
+          {
+            "number": 1,
+            "value": "Monthly"
+          },
+          {
+            "number": 2,
+            "value": "Yearly"
+          },
+          {
+            "number": 3,
+            "value": "Weekly"
+          }
+        ]
+      },
+      {
+        "name": "next_billing_date",
+        "description": "The date when the next billing will occur.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Financial timing data"
+        },
+        "format": "date"
+      },
+      {
+        "name": "category",
+        "description": "Category of the subscription service.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Categorization of spending"
+        }
+      },
+      {
+        "name": "cancellation_url",
+        "description": "URL to cancel the subscription.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Service management link"
+        },
+        "nullable": true
+      },
+      {
+        "name": "is_active",
+        "description": "Indicates if the subscription is currently active.",
+        "type": 3,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Status flag"
+        }
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "user_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_creator"
+        ]
+      },
+      {
+        "fields": [
+          "data_updater"
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "referencing_fields": [
+          "user_id"
+        ],
+        "referenced_entity": {
+          "name": "user_profile"
+        },
+        "referenced_fields": [
+          "id"
+        ],
+        "cascade": true
+      }
+    ]
+  },
+  "task": {
+    "id": "6934d32689dfb99c8f5f08b3",
+    "root": "6934d32689dfb99c8f5f08b3",
+    "project": "6934d32689dfb99c8f5f08b2",
+    "user": "481113e0-2081-70a6-537d-401e43a89dbd"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}

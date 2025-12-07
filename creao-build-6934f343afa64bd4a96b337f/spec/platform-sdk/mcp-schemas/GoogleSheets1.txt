@@ -1,0 +1,138 @@
+Mcp name: "GoogleSheets"
+Mcp id: "686de48c6fd1cae1afbb55ba"
+Mcp url: "https://backend.composio.dev/v3/mcp/01b46296-8ea1-4686-a211-87ba79800a99/mcp?user_id=6934d32689dfb99c8f5f08b2"
+Schema info:
+Tool Name: GOOGLESHEETS_CREATE_SPREADSHEET_COLUMN
+
+Here is the input and output schema info of Tool GOOGLESHEETS_CREATE_SPREADSHEET_COLUMN of Mcp GoogleSheets (Mcp Id: 686de48c6fd1cae1afbb55ba):
+inputSchema:
+{"type":"object","properties":{"inherit_from_before":{"type":"boolean","description":"If true, the new column inherits properties (e.g., formatting, width) from the column immediately to its left (the preceding column). If false (default), it inherits from the column immediately to its right (the succeeding column). This is ignored if there is no respective preceding or succeeding column.","title":"Inherit From Before","default":false,"examples":["True","False"]},"insert_index":{"type":"integer","description":"The 0-based index at which the new column will be inserted. For example, an index of 0 inserts the column before the current first column (A), and an index of 1 inserts it between the current columns A and B.","title":"Insert Index","default":0,"examples":["0","1","5"]},"sheet_id":{"type":"integer","description":"The numeric identifier of the specific sheet (tab) within the spreadsheet where the column will be added.","title":"Sheet Id","examples":["0","123456789"]},"spreadsheet_id":{"type":"string","description":"The unique identifier of the Google Spreadsheet where the column will be created.","title":"Spreadsheet Id","examples":["1qZysYd_N2cZ9gkZ8sR7M0rP8sX5vW2bA9gV3rF1cE0"]}},"required":["spreadsheet_id","sheet_id"],"title":"CreateSpreadsheetColumnRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"spreadsheet":{"type":"object","description":"A dictionary object representing the updated spreadsheet resource. This object contains details about the spreadsheet's properties and its sheets. Note: Grid data (cell values) is not included in this response.","title":"Spreadsheet","additionalProperties":true}},"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"CreateSpreadsheetColumnResponseWrapper"}
+schema info of GOOGLESHEETS_CREATE_SPREADSHEET_COLUMN ends.
+
+
+Mcp name: "GoogleSheets"
+Mcp id: "686de48c6fd1cae1afbb55ba"
+Mcp url: "https://backend.composio.dev/v3/mcp/01b46296-8ea1-4686-a211-87ba79800a99/mcp?user_id=6934d32689dfb99c8f5f08b2"
+Schema info:
+Tool Name: GOOGLESHEETS_CREATE_SPREADSHEET_ROW
+
+Here is the input and output schema info of Tool GOOGLESHEETS_CREATE_SPREADSHEET_ROW of Mcp GoogleSheets (Mcp Id: 686de48c6fd1cae1afbb55ba):
+inputSchema:
+{"type":"object","properties":{"inherit_from_before":{"type":"boolean","description":"If True, the newly inserted row will inherit formatting and properties from the row immediately preceding its insertion point. If False, it will have default formatting.","title":"Inherit From Before","default":false,"examples":[true,false]},"insert_index":{"type":"integer","description":"The 0-based index at which the new row should be inserted. For example, an index of 0 inserts the row at the beginning of the sheet. If the index is greater than the current number of rows, the row is appended.","title":"Insert Index","default":0,"examples":[0,5,100]},"sheet_id":{"type":"integer","description":"The numeric identifier of the sheet (tab) within the spreadsheet where the row will be inserted. This ID (gid) is found in the URL of the spreadsheet (e.g., '0' for the first sheet).","title":"Sheet Id","examples":[0,123456789]},"spreadsheet_id":{"type":"string","description":"The unique identifier of the Google Spreadsheet. This ID is found in the URL of the spreadsheet (e.g., '1qpyC0XzHc_-_d824s2VfopkHh7D0jW4aXCS1D_AlGA').","title":"Spreadsheet Id","examples":["1qpyC0XzHc_-_d824s2VfopkHh7D0jW4aXCS1D_AlGA"]}},"required":["spreadsheet_id","sheet_id"],"title":"CreateSpreadsheetRowRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"spreadsheet":{"type":"object","description":"A dictionary representing the updated Google Spreadsheet resource, including details about the newly inserted row if 'includeSpreadsheetInResponse' was true in the underlying API call (which it is by default in this action).","title":"Spreadsheet","additionalProperties":true}},"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"CreateSpreadsheetRowResponseWrapper"}
+schema info of GOOGLESHEETS_CREATE_SPREADSHEET_ROW ends.
+
+
+Mcp name: "GoogleSheets"
+Mcp id: "686de48c6fd1cae1afbb55ba"
+Mcp url: "https://backend.composio.dev/v3/mcp/01b46296-8ea1-4686-a211-87ba79800a99/mcp?user_id=6934d32689dfb99c8f5f08b2"
+Schema info:
+Tool Name: GOOGLESHEETS_DELETE_DIMENSION
+
+Here is the input and output schema info of Tool GOOGLESHEETS_DELETE_DIMENSION of Mcp GoogleSheets (Mcp Id: 686de48c6fd1cae1afbb55ba):
+inputSchema:
+{"type":"object","properties":{"delete_dimension_request":{"type":"object","description":"The details for the delete dimension request object.","title":"Delete Dimension Request","properties":{"range":{"type":"object","description":"The range of the dimension to delete.","title":"Range","properties":{"dimension":{"type":"string","description":"The dimension to delete.","title":"Dimension","enum":["ROWS","COLUMNS"],"examples":["ROWS","COLUMNS"]},"end_index":{"type":"integer","description":"The zero-based end index of the range to delete, exclusive. The end index must be greater than the start index.","title":"End Index","exclusiveMinimum":0,"examples":[1,10]},"sheet_id":{"type":"integer","description":"The ID of the sheet from which to delete the dimension.","title":"Sheet Id","examples":[0,123456789]},"start_index":{"type":"integer","description":"The zero-based start index of the range to delete, inclusive. The start index must be less than the end index.","title":"Start Index","minimum":0,"examples":[0,5]}},"required":["sheet_id","dimension","start_index","end_index"],"additionalProperties":false}},"required":["range"],"additionalProperties":false},"include_spreadsheet_in_response":{"type":"boolean","description":"Determines if the update response should include the spreadsheet resource.","title":"Include Spreadsheet In Response","default":null,"nullable":true,"examples":[true,false]},"response_include_grid_data":{"type":"boolean","description":"True if grid data should be returned. This parameter is ignored if a field mask was set in the request.","title":"Response Include Grid Data","default":null,"nullable":true,"examples":[true,false]},"response_ranges":{"type":"array","description":"Limits the ranges of cells included in the response spreadsheet.","title":"Response Ranges","default":null,"nullable":true,"items":{"type":"string","properties":{}},"examples":[["Sheet1!A1:B2","Sheet2!C:C"]]},"spreadsheet_id":{"type":"string","description":"The ID of the spreadsheet.","title":"Spreadsheet Id","examples":["abc123xyz789"]}},"required":["spreadsheet_id","delete_dimension_request"],"title":"DeleteDimensionRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"replies":{"type":"array","description":"A list of replies to the batch update requests. For DeleteDimensionRequest, the reply is an empty object if successful.","title":"Replies","items":{"type":"object","title":"BatchUpdateReply","properties":{}}},"spreadsheetId":{"type":"string","description":"The ID of the spreadsheet that was updated.","title":"Spreadsheet Id"}},"required":["spreadsheetId","replies"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"DeleteDimensionResponseWrapper"}
+schema info of GOOGLESHEETS_DELETE_DIMENSION ends.
+
+
+Mcp name: "GoogleSheets"
+Mcp id: "686de48c6fd1cae1afbb55ba"
+Mcp url: "https://backend.composio.dev/v3/mcp/01b46296-8ea1-4686-a211-87ba79800a99/mcp?user_id=6934d32689dfb99c8f5f08b2"
+Schema info:
+Tool Name: GOOGLESHEETS_DELETE_SHEET
+
+Here is the input and output schema info of Tool GOOGLESHEETS_DELETE_SHEET of Mcp GoogleSheets (Mcp Id: 686de48c6fd1cae1afbb55ba):
+inputSchema:
+{"type":"object","properties":{"sheet_id":{"type":"integer","description":"The ID of the sheet to delete. If the sheet is of DATA_SOURCE type, the associated DataSource is also deleted.","title":"Sheet Id","examples":[123456789]},"spreadsheetId":{"type":"string","description":"The ID of the spreadsheet from which to delete the sheet.","title":"Spreadsheet Id","examples":["abc123xyz789"]}},"required":["spreadsheetId","sheet_id"],"title":"DeleteSheetRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"replies":{"type":"array","description":"A list of replies for each request in the batch. For a DeleteSheetRequest, the reply will be an empty object {} upon success.","title":"Replies","items":{"type":"object","properties":{},"additionalProperties":true}},"spreadsheetId":{"type":"string","description":"The ID of the spreadsheet.","title":"Spreadsheet Id"}},"required":["spreadsheetId","replies"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"DeleteSheetResponseWrapper"}
+schema info of GOOGLESHEETS_DELETE_SHEET ends.
+
+
+Mcp name: "GoogleSheets"
+Mcp id: "686de48c6fd1cae1afbb55ba"
+Mcp url: "https://backend.composio.dev/v3/mcp/01b46296-8ea1-4686-a211-87ba79800a99/mcp?user_id=6934d32689dfb99c8f5f08b2"
+Schema info:
+Tool Name: GOOGLESHEETS_EXECUTE_SQL
+
+Here is the input and output schema info of Tool GOOGLESHEETS_EXECUTE_SQL of Mcp GoogleSheets (Mcp Id: 686de48c6fd1cae1afbb55ba):
+inputSchema:
+{"type":"object","properties":{"delete_method":{"type":"string","description":"For DELETE operations: 'clear' preserves row structure, 'remove_rows' shifts data up","title":"Delete Method","default":"clear","enum":["clear","remove_rows"]},"dry_run":{"type":"boolean","description":"Preview changes without applying them (for write operations)","title":"Dry Run","default":false},"spreadsheet_id":{"type":"string","description":"Google Sheets ID","title":"Spreadsheet Id","examples":["1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms"]},"sql":{"type":"string","description":"SQL query to execute. Supports SELECT, INSERT, UPDATE, DELETE operations.","title":"Sql","examples":["SELECT * FROM \"Sales_Data\" LIMIT 10","INSERT INTO \"Customers\" (name, email) VALUES ('John Doe', 'john@example.com')","UPDATE \"Inventory\" SET quantity = quantity - 10 WHERE sku = 'ABC123'","DELETE FROM \"Old_Data\" WHERE date < '2023-01-01'"]}},"required":["spreadsheet_id","sql"],"title":"ExecuteSqlRequest"}
+outputSchema:
+{"type":"object","properties":{"affected_rows":{"type":"integer","description":"Number of rows affected by the operation","title":"Affected Rows"},"data":{"type":"array","description":"Result data for SELECT queries","title":"Data","default":null,"nullable":true,"items":{"type":"object","properties":{},"additionalProperties":true}},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"message":{"type":"string","description":"Human-readable result message","title":"Message"},"operation":{"type":"string","description":"SQL operation performed: SELECT, INSERT, UPDATE, or DELETE","title":"Operation"},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"},"table_schema":{"type":"array","description":"Schema for SELECT query results","title":"Table Schema","default":null,"nullable":true,"items":{"type":"object","properties":{},"additionalProperties":true}}},"required":["operation","affected_rows","message","successful"],"title":"ExecuteSqlResponseWrapper"}
+schema info of GOOGLESHEETS_EXECUTE_SQL ends.
+
+
+Mcp name: "GoogleSheets"
+Mcp id: "686de48c6fd1cae1afbb55ba"
+Mcp url: "https://backend.composio.dev/v3/mcp/01b46296-8ea1-4686-a211-87ba79800a99/mcp?user_id=6934d32689dfb99c8f5f08b2"
+Schema info:
+Tool Name: GOOGLESHEETS_FIND_WORKSHEET_BY_TITLE
+
+Here is the input and output schema info of Tool GOOGLESHEETS_FIND_WORKSHEET_BY_TITLE of Mcp GoogleSheets (Mcp Id: 686de48c6fd1cae1afbb55ba):
+inputSchema:
+{"type":"object","properties":{"spreadsheet_id":{"type":"string","description":"The unique identifier of the Google Spreadsheet. This ID is part of the spreadsheet's URL.","title":"Spreadsheet Id","examples":["1aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789_drivE","your_actual_spreadsheet_id"]},"title":{"type":"string","description":"The exact, case-sensitive title of the worksheet (tab name) to find.","title":"Title","examples":["Sheet1","Q3 Report","Customer Data"]}},"required":["spreadsheet_id","title"],"title":"FindWorksheetByTitleRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"found":{"type":"boolean","description":"True if a worksheet with the exact specified title was found within the spreadsheet; False otherwise.","title":"Found"},"sheet_data":{"type":"object","description":"A dictionary containing the complete metadata of the Google Spreadsheet, including properties, named ranges, and details for all its worksheets (tabs). This data is provided regardless of whether the target worksheet is found.","title":"Sheet Data","additionalProperties":true}},"required":["found","sheet_data"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"FindWorksheetByTitleResponseWrapper"}
+schema info of GOOGLESHEETS_FIND_WORKSHEET_BY_TITLE ends.
+
+
+Mcp name: "GoogleSheets"
+Mcp id: "686de48c6fd1cae1afbb55ba"
+Mcp url: "https://backend.composio.dev/v3/mcp/01b46296-8ea1-4686-a211-87ba79800a99/mcp?user_id=6934d32689dfb99c8f5f08b2"
+Schema info:
+Tool Name: GOOGLESHEETS_FORMAT_CELL
+
+Here is the input and output schema info of Tool GOOGLESHEETS_FORMAT_CELL of Mcp GoogleSheets (Mcp Id: 686de48c6fd1cae1afbb55ba):
+inputSchema:
+{"type":"object","properties":{"blue":{"type":"number","description":"Blue component of the background color (0.0-1.0).","title":"Blue","default":0.9,"examples":["0.0","0.5","1.0"]},"bold":{"type":"boolean","description":"Apply bold formatting.","title":"Bold","default":false,"examples":["true","false"]},"end_column_index":{"type":"integer","description":"0-based index of the column *after* the last column in the range (exclusive); must be greater than `start_column_index`.","title":"End Column Index","examples":["2","5"]},"end_row_index":{"type":"integer","description":"0-based index of the row *after* the last row in the range (exclusive); must be greater than `start_row_index`.","title":"End Row Index","examples":["1","10"]},"fontSize":{"type":"integer","description":"Font size in points.","title":"Font Size","default":10,"examples":["10","12","14"]},"green":{"type":"number","description":"Green component of the background color (0.0-1.0).","title":"Green","default":0.9,"examples":["0.0","0.5","1.0"]},"italic":{"type":"boolean","description":"Apply italic formatting.","title":"Italic","default":false,"examples":["true","false"]},"red":{"type":"number","description":"Red component of the background color (0.0-1.0).","title":"Red","default":0.9,"examples":["0.0","0.5","1.0"]},"spreadsheet_id":{"type":"string","description":"Identifier of the Google Sheets spreadsheet.","title":"Spreadsheet Id","examples":["1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms"]},"start_column_index":{"type":"integer","description":"0-based index of the first column in the range.","title":"Start Column Index","examples":["0","1"]},"start_row_index":{"type":"integer","description":"0-based index of the first row in the range.","title":"Start Row Index","examples":["0","5"]},"strikethrough":{"type":"boolean","description":"Apply strikethrough formatting.","title":"Strikethrough","default":false,"examples":["true","false"]},"underline":{"type":"boolean","description":"Apply underline formatting.","title":"Underline","default":false,"examples":["true","false"]},"worksheet_id":{"type":"integer","description":"ID (sheetId) of the worksheet. Use `GOOGLESHEETS_GET_SPREADSHEET_INFO` to find this ID.","title":"Worksheet Id","examples":["123456789"]}},"required":["spreadsheet_id","worksheet_id","start_row_index","start_column_index","end_row_index","end_column_index"],"title":"FormatCellRequest","description":"Parameters for applying formatting to a cell range in a Google Sheet."}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"replies":{"type":"array","description":"List of responses from the batch update; for cell formatting, typically one empty reply confirming the operation.","title":"Replies","items":{"properties":{}}},"spreadsheetId":{"type":"string","description":"Identifier of the spreadsheet where formatting was applied.","title":"Spreadsheet Id"}},"required":["spreadsheetId"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"FormatCellResponseWrapper"}
+schema info of GOOGLESHEETS_FORMAT_CELL ends.
+
+
+Mcp name: "GoogleSheets"
+Mcp id: "686de48c6fd1cae1afbb55ba"
+Mcp url: "https://backend.composio.dev/v3/mcp/01b46296-8ea1-4686-a211-87ba79800a99/mcp?user_id=6934d32689dfb99c8f5f08b2"
+Schema info:
+Tool Name: GOOGLESHEETS_GET_SHEET_NAMES
+
+Here is the input and output schema info of Tool GOOGLESHEETS_GET_SHEET_NAMES of Mcp GoogleSheets (Mcp Id: 686de48c6fd1cae1afbb55ba):
+inputSchema:
+{"type":"object","properties":{"spreadsheet_id":{"type":"string","description":"The unique identifier of the Google Spreadsheet. This ID is typically found in the spreadsheet's URL.","title":"Spreadsheet Id","examples":["1qpyC0XzvTcKT6EISywY_7H7D7No1tpxEXAMPLE_ID"]}},"required":["spreadsheet_id"],"title":"GetSheetNamesRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"sheet_names":{"type":"array","description":"A list of names of all worksheets within the specified spreadsheet. Returns an empty list if the spreadsheet contains no worksheets.","title":"Sheet Names","items":{"type":"string","properties":{}}}},"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"GetSheetNamesResponseWrapper"}
+schema info of GOOGLESHEETS_GET_SHEET_NAMES ends.
+
+
+Mcp name: "GoogleSheets"
+Mcp id: "686de48c6fd1cae1afbb55ba"
+Mcp url: "https://backend.composio.dev/v3/mcp/01b46296-8ea1-4686-a211-87ba79800a99/mcp?user_id=6934d32689dfb99c8f5f08b2"
+Schema info:
+Tool Name: GOOGLESHEETS_GET_SPREADSHEET_BY_DATA_FILTER
+
+Here is the input and output schema info of Tool GOOGLESHEETS_GET_SPREADSHEET_BY_DATA_FILTER of Mcp GoogleSheets (Mcp Id: 686de48c6fd1cae1afbb55ba):
+inputSchema:
+{"type":"object","properties":{"dataFilters":{"type":"array","description":"The DataFilters used to select which ranges to retrieve.","title":"Data Filters","items":{"type":"object","title":"DataFilter","properties":{"a1Range":{"type":"string","description":"Selects data that matches the specified A1 range.","title":"A1 Range","default":null,"nullable":true,"examples":["Sheet1!A1:B2"]},"developerMetadataLookup":{"type":"object","description":"Selects data associated with developer metadata.","title":"DeveloperMetadataLookup","default":null,"nullable":true,"properties":{"locationType":{"type":"string","description":"Location type of metadata.","title":"DeveloperMetadataLookupLocationType","default":null,"nullable":true,"enum":["ROW","COLUMN","SHEET","SPREADSHEET","OBJECT"]},"metadataId":{"type":"integer","description":"Filter by metadata ID.","title":"Metadata Id","default":null,"nullable":true,"examples":[123]},"metadataKey":{"type":"string","description":"Filter by metadata key.","title":"Metadata Key","default":null,"nullable":true,"examples":["project_id"]},"metadataValue":{"type":"string","description":"Filter by metadata value.","title":"Metadata Value","default":null,"nullable":true,"examples":["alpha"]},"visibility":{"type":"string","description":"Metadata visibility.","title":"DeveloperMetadataLookupVisibility","default":null,"nullable":true,"enum":["DOCUMENT","PROJECT"]}},"additionalProperties":false},"gridRange":{"type":"object","description":"Selects data that matches the range described by the GridRange.","title":"GridRange","default":null,"nullable":true,"properties":{"endColumnIndex":{"type":"integer","description":"The end column (0-based, exclusive) of the range.","title":"End Column Index","default":null,"nullable":true,"exclusiveMinimum":0,"examples":[5]},"endRowIndex":{"type":"integer","description":"The end row (0-based, exclusive) of the range.","title":"End Row Index","default":null,"nullable":true,"exclusiveMinimum":0,"examples":[10]},"sheetId":{"type":"integer","description":"The ID of the sheet this range is on.","title":"Sheet Id","default":null,"nullable":true,"examples":[0]},"startColumnIndex":{"type":"integer","description":"The start column (0-based, inclusive) of the range.","title":"Start Column Index","default":null,"nullable":true,"minimum":0,"examples":[0]},"startRowIndex":{"type":"integer","description":"The start row (0-based, inclusive) of the range.","title":"Start Row Index","default":null,"nullable":true,"minimum":0,"examples":[0]}},"additionalProperties":false}}}},"excludeTablesInBandedRanges":{"type":"boolean","description":"True if tables should be excluded in the banded ranges. False if not set.","title":"Exclude Tables In Banded Ranges","default":null,"nullable":true,"examples":[false]},"includeGridData":{"type":"boolean","description":"True if grid data should be returned. Ignored if a field mask is set.","title":"Include Grid Data","default":null,"nullable":true,"examples":[true]},"spreadsheetId":{"type":"string","description":"The ID of the spreadsheet to request.","title":"Spreadsheet Id","examples":["abc123xyz789"]}},"required":["spreadsheetId","dataFilters"],"title":"GetSpreadsheetByDataFilterRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"namedRanges":{"type":"array","description":"The named ranges defined in this spreadsheet.","title":"Named Ranges","default":null,"nullable":true,"items":{"type":"object","properties":{},"additionalProperties":true}},"properties":{"type":"object","description":"The properties of the spreadsheet.","title":"Properties","default":null,"nullable":true,"additionalProperties":true},"sheets":{"type":"array","description":"The sheets that are part of this spreadsheet.","title":"Sheets","default":null,"nullable":true,"items":{"type":"object","properties":{},"additionalProperties":true}},"spreadsheetId":{"type":"string","description":"The ID of the spreadsheet.","title":"Spreadsheet Id"},"spreadsheetUrl":{"type":"string","description":"The URL of the spreadsheet.","title":"Spreadsheet Url","default":null,"nullable":true}},"required":["spreadsheetId"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"GetSpreadsheetByDataFilterResponseWrapper"}
+schema info of GOOGLESHEETS_GET_SPREADSHEET_BY_DATA_FILTER ends.
+
+
+Mcp name: "GoogleSheets"
+Mcp id: "686de48c6fd1cae1afbb55ba"
+Mcp url: "https://backend.composio.dev/v3/mcp/01b46296-8ea1-4686-a211-87ba79800a99/mcp?user_id=6934d32689dfb99c8f5f08b2"
+Schema info:
+Tool Name: GOOGLESHEETS_GET_SPREADSHEET_INFO
+
+Here is the input and output schema info of Tool GOOGLESHEETS_GET_SPREADSHEET_INFO of Mcp GoogleSheets (Mcp Id: 686de48c6fd1cae1afbb55ba):
+inputSchema:
+{"type":"object","properties":{"spreadsheet_id":{"type":"string","description":"Unique identifier of the Google Spreadsheet, typically found in its URL.","title":"Spreadsheet Id","examples":["12345abcdefGHIJKLMNOPqrstuvwxyz67890UVWXYZ"]}},"required":["spreadsheet_id"],"title":"GetSpreadsheetInfoRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"response_data":{"type":"object","description":"Spreadsheet resource from the Google Sheets API, including properties (ID, title, locale, time zone), sheet details (ID, title, index, type, grid properties), named ranges, and other metadata. For the exact structure, refer to the Google Sheets API v4 'Spreadsheet' resource documentation.","title":"Response Data","additionalProperties":true}},"required":["response_data"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"GetSpreadsheetInfoResponseWrapper"}
+schema info of GOOGLESHEETS_GET_SPREADSHEET_INFO ends.

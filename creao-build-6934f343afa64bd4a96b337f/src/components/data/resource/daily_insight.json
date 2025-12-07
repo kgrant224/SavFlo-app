@@ -1,0 +1,174 @@
+{
+  "id": "102019af65e1c81754b9029f3d8931c0fa4",
+  "version": "102019af6e7ad6870d497a83f57b7e1c51d",
+  "schema": {
+    "name": "daily_insight",
+    "description": "Stores analytical insights generated for the user based on their financial data.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique identifier for the insight.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal system identifier"
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "user_id",
+        "description": "Reference ID of the user the insight belongs to.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Foreign key reference"
+        }
+      },
+      {
+        "name": "insight_date",
+        "description": "The date related to the insight.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Time-specific financial analysis"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "insight_text",
+        "description": "The content of the financial insight.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Personalized advice based on financial data"
+        }
+      },
+      {
+        "name": "category",
+        "description": "The topic category of the insight.",
+        "type": 100,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Classification of advice"
+        },
+        "enumeration": [
+          {
+            "value": "Unspecified"
+          },
+          {
+            "number": 1,
+            "value": "Spending"
+          },
+          {
+            "number": 2,
+            "value": "Saving"
+          },
+          {
+            "number": 3,
+            "value": "Budget"
+          },
+          {
+            "number": 4,
+            "value": "General"
+          }
+        ]
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "user_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "insight_date"
+        ],
+        "order": true
+      },
+      {
+        "fields": [
+          "data_creator"
+        ]
+      },
+      {
+        "fields": [
+          "data_updater"
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "referencing_fields": [
+          "user_id"
+        ],
+        "referenced_entity": {
+          "name": "user_profile"
+        },
+        "referenced_fields": [
+          "id"
+        ],
+        "cascade": true
+      }
+    ]
+  },
+  "task": {
+    "id": "6934f343afa64bd4a96b337f",
+    "root": "6934d32689dfb99c8f5f08b3",
+    "project": "6934d32689dfb99c8f5f08b2",
+    "user": "481113e0-2081-70a6-537d-401e43a89dbd"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}

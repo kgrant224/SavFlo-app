@@ -1,0 +1,167 @@
+{
+  "id": "102019af65dc476777790f5abbcb2234bf8",
+  "version": "102019af65dc4767629bdb0fa95a0889023",
+  "schema": {
+    "name": "budget",
+    "description": "Defines spending limits for specific categories for a user.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique identifier for the budget.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal system identifier"
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "user_id",
+        "description": "Reference ID of the user who owns this budget.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Foreign key reference"
+        }
+      },
+      {
+        "name": "category_name",
+        "description": "Name of the category for this budget.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Personal financial planning"
+        }
+      },
+      {
+        "name": "monthly_limit",
+        "description": "The maximum spending limit for this category.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Financial limit setting"
+        },
+        "numeric": "float"
+      },
+      {
+        "name": "current_spent",
+        "description": "The amount currently spent in this period.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Financial status tracking"
+        },
+        "numeric": "float"
+      },
+      {
+        "name": "alert_threshold",
+        "description": "Percentage of limit at which to alert the user (default 80).",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "System configuration for user"
+        },
+        "numeric": "float"
+      },
+      {
+        "name": "is_active",
+        "description": "Whether this budget is currently active.",
+        "type": 3,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Status flag"
+        }
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "user_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_creator"
+        ]
+      },
+      {
+        "fields": [
+          "data_updater"
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "referencing_fields": [
+          "user_id"
+        ],
+        "referenced_entity": {
+          "name": "user_profile"
+        },
+        "referenced_fields": [
+          "id"
+        ],
+        "cascade": true
+      }
+    ]
+  },
+  "task": {
+    "id": "6934d32689dfb99c8f5f08b3",
+    "root": "6934d32689dfb99c8f5f08b3",
+    "project": "6934d32689dfb99c8f5f08b2",
+    "user": "481113e0-2081-70a6-537d-401e43a89dbd"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}

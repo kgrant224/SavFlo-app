@@ -1,0 +1,178 @@
+{
+  "id": "102019af65e1c807df689a10be55be19e9e",
+  "version": "102019af6e7ad6870d497a83f57b7e1c51d",
+  "schema": {
+    "name": "savings_goal",
+    "description": "Tracks specific savings objectives and progress for a user.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique identifier for the savings goal.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal system identifier"
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "user_id",
+        "description": "Reference ID of the user who owns this goal.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Foreign key reference"
+        }
+      },
+      {
+        "name": "goal_name",
+        "description": "Name of the savings goal.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Personal financial goal"
+        }
+      },
+      {
+        "name": "target_amount",
+        "description": "The total amount required to reach the goal.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Financial target data"
+        },
+        "numeric": "float"
+      },
+      {
+        "name": "current_amount",
+        "description": "The amount currently saved towards the goal.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Financial progress data"
+        },
+        "numeric": "float"
+      },
+      {
+        "name": "deadline",
+        "description": "The target date for achieving the goal.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Time-sensitive financial plan"
+        },
+        "nullable": true,
+        "format": "date"
+      },
+      {
+        "name": "priority_level",
+        "description": "Numeric priority level for the goal.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "User preference configuration"
+        },
+        "numeric": "int"
+      },
+      {
+        "name": "is_completed",
+        "description": "Indicates if the goal has been achieved.",
+        "type": 3,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Status flag"
+        }
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "user_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_creator"
+        ]
+      },
+      {
+        "fields": [
+          "data_updater"
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "referencing_fields": [
+          "user_id"
+        ],
+        "referenced_entity": {
+          "name": "user_profile"
+        },
+        "referenced_fields": [
+          "id"
+        ],
+        "cascade": true
+      }
+    ]
+  },
+  "task": {
+    "id": "6934f343afa64bd4a96b337f",
+    "root": "6934d32689dfb99c8f5f08b3",
+    "project": "6934d32689dfb99c8f5f08b2",
+    "user": "481113e0-2081-70a6-537d-401e43a89dbd"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}

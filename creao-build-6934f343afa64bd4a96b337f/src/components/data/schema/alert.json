@@ -1,0 +1,199 @@
+{
+  "id": "102019af65dc47678d49bb24aa65e2464dd",
+  "version": "102019af65dc4767629bdb0fa95a0889023",
+  "schema": {
+    "name": "alert",
+    "description": "System notifications and alerts for the user.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique identifier for the alert.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal system identifier"
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "user_id",
+        "description": "Reference ID of the user the alert is for.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Foreign key reference"
+        }
+      },
+      {
+        "name": "alert_type",
+        "description": "Type classification of the alert.",
+        "type": 100,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "System categorization"
+        },
+        "enumeration": [
+          {
+            "value": "Unspecified"
+          },
+          {
+            "number": 1,
+            "value": "BudgetExceeded"
+          },
+          {
+            "number": 2,
+            "value": "UnusualSpending"
+          },
+          {
+            "number": 3,
+            "value": "SubscriptionRenewal"
+          },
+          {
+            "number": 4,
+            "value": "GoalMilestone"
+          }
+        ]
+      },
+      {
+        "name": "message",
+        "description": "The textual content of the alert.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Personalized notification content"
+        }
+      },
+      {
+        "name": "severity",
+        "description": "Severity level of the alert.",
+        "type": 100,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Notification prioritization"
+        },
+        "enumeration": [
+          {
+            "value": "Unspecified"
+          },
+          {
+            "number": 1,
+            "value": "Info"
+          },
+          {
+            "number": 2,
+            "value": "Warning"
+          },
+          {
+            "number": 3,
+            "value": "Critical"
+          }
+        ]
+      },
+      {
+        "name": "is_read",
+        "description": "Indicates if the user has read the alert.",
+        "type": 3,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "User interaction state"
+        }
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "user_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "is_read"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_creator"
+        ]
+      },
+      {
+        "fields": [
+          "data_updater"
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "referencing_fields": [
+          "user_id"
+        ],
+        "referenced_entity": {
+          "name": "user_profile"
+        },
+        "referenced_fields": [
+          "id"
+        ],
+        "cascade": true
+      }
+    ]
+  },
+  "task": {
+    "id": "6934d32689dfb99c8f5f08b3",
+    "root": "6934d32689dfb99c8f5f08b3",
+    "project": "6934d32689dfb99c8f5f08b2",
+    "user": "481113e0-2081-70a6-537d-401e43a89dbd"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}

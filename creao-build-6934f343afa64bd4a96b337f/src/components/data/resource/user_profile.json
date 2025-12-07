@@ -1,0 +1,155 @@
+{
+  "id": "102019af65e1c817a078a3d0f232c255034",
+  "version": "102019af6e7ad6870d497a83f57b7e1c51d",
+  "schema": {
+    "name": "user_profile",
+    "description": "Stores profile information, financial settings, and account tiers for the user.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique identifier for the user profile.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal system identifier"
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal audit trail"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "monthly_income",
+        "description": "The monthly income of the user.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Personal financial information"
+        },
+        "numeric": "float"
+      },
+      {
+        "name": "financial_habits",
+        "description": "Descriptive text regarding the user's financial habits.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Personal behavioral data"
+        },
+        "nullable": true
+      },
+      {
+        "name": "savings_target",
+        "description": "The overall savings target amount for the user.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Personal financial goals"
+        },
+        "nullable": true,
+        "numeric": "float"
+      },
+      {
+        "name": "account_tier",
+        "description": "The subscription tier of the user account.",
+        "type": 100,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Account status information"
+        },
+        "enumeration": [
+          {
+            "value": "Unspecified"
+          },
+          {
+            "number": 1,
+            "value": "Free"
+          },
+          {
+            "number": 2,
+            "value": "Premium"
+          }
+        ]
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "account_tier"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "create_time"
+        ],
+        "order": true
+      },
+      {
+        "fields": [
+          "data_creator"
+        ]
+      },
+      {
+        "fields": [
+          "data_updater"
+        ]
+      }
+    ]
+  },
+  "task": {
+    "id": "6934f343afa64bd4a96b337f",
+    "root": "6934d32689dfb99c8f5f08b3",
+    "project": "6934d32689dfb99c8f5f08b2",
+    "user": "481113e0-2081-70a6-537d-401e43a89dbd"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}
