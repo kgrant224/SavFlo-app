@@ -2,6 +2,7 @@
   "name": "basic_template",
   "private": true,
   "type": "module",
+  "homepage": "https://kgrant224.github.io/SavFlo-app/",
   "scripts": {
     "dev": "vite --port 3000",
     "start": "vite --port 3000",
@@ -9,13 +10,15 @@
     "serve": "vite preview",
     "test": "vitest run",
     "check": "tsgo --noEmit && npm run lint:radix -- --fix && npm run format",
-    "check:safe": "timeout 20 npm run check || (echo 'Check timed out after 20 seconds' && exit 1)",
+    "check:safe": "( npm run check ) & pid=$!; ( sleep 20 && kill $pid ) 2>/dev/null & wait $pid",
     "format": "biome check --write --unsafe",
     "format:quiet": "biome check --write --unsafe --log-level=warn",
     "lint:radix": "grep -l -r '<SelectItem' src | xargs eslint --config config/eslint/eslint.radix.config.js",
     "lint:mcp": "eslint src --config config/eslint/eslint.mcp.config.js",
     "lint:validate": "node config/eslint/validate-configs.js",
-    "prepare": "if [ -f ./bin/setup-githooks.sh ]; then ./bin/setup-githooks.sh; fi"
+    "prepare": "if [ -f ./bin/setup-githooks.sh ]; then ./bin/setup-githooks.sh; fi",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.0.0",
@@ -97,6 +100,7 @@
     "eslint": "^9.32.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
+    "gh-pages": "^6.3.0",
     "jsdom": "^26.0.0",
     "openapi-typescript": "^7.8.0",
     "typescript": "~5.8.3",

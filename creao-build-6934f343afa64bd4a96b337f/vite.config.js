@@ -1,4 +1,3 @@
-// import { createRequire } from "node:module";
 import { resolve } from "node:path";
 import tailwindcss from "@tailwindcss/vite";
 import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
@@ -9,14 +8,15 @@ import { creaoPlugins } from "./config/vite/creao-plugin.mjs";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	base: process.env.TENANT_ID ? `/${process.env.TENANT_ID}/` : "/",
+	// Hardcode GitHub Pages base path for SavFlo-app
+	base: "/SavFlo-app/",
 	define: {
 		"import.meta.env.TENANT_ID": JSON.stringify(process.env.TENANT_ID || ""),
 	},
 	plugins: [
-		...creaoPlugins(),
+		...creaoPlugins({ base: "/SavFlo-app/" }), // Pass base to Creao plugins if supported
 		TanStackRouterVite({
-			autoCodeSplitting: false, // affects pick-n-edit feature. disabled for now.
+			autoCodeSplitting: false, // affects pick-n-edit feature. disabled for now
 		}),
 		viteReact({
 			jsxRuntime: "automatic",
@@ -44,5 +44,13 @@ export default defineConfig({
 	},
 	build: {
 		chunkSizeWarningLimit: 1500,
+		rollupOptions: {
+			output: {
+				// Ensure dynamic imports use correct base path on GitHub Pages
+				entryFileNames: "assets/[name]-[hash].js",
+				chunkFileNames: "assets/[name]-[hash].js",
+				assetFileNames: "assets/[name]-[hash].[ext]",
+			},
+		},
 	},
 });
